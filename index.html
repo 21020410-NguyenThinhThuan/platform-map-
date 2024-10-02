@@ -1,0 +1,136 @@
+<html>
+  <head>
+    <title>map</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet-src.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-easybutton/src/easy-button.css" />
+    <script src="https://unpkg.com/leaflet-easybutton/src/easy-button.js"></script>
+
+    <script src="https://cdn.rawgit.com/aparshin/leaflet-boundary-canvas/f00b4d35/src/BoundaryCanvas.js"></script>
+
+  <style>
+      body {
+          margin: 0;
+          padding: 0;
+      }
+
+      #map {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 100%;
+      }
+  </style>
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <script>
+      var map = L.map("map");
+
+      $.getJSON('https://polygons.openstreetmap.fr/get_geojson.py?id=49915&params=0.080000-0.001000-0.001000').then(function(geoJSON) {
+        var osm = new L.TileLayer.BoundaryCanvas("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          boundary: geoJSON,
+          attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, UK shape <a href="https://github.com/johan/world.geo.json">johan/word.geo.json</a>'
+        });
+      map.addLayer(osm);
+      var ukLayer = L.geoJSON(geoJSON);
+      map.fitBounds(ukLayer.getBounds());
+      });
+      
+      var geocoder = L.Control.geocoder({
+        defaultMarkGeocode: true
+      }).addTo(map);
+
+
+      // Lớp bệnh viện (LayerGroup)
+      var hospitalLayer = L.layerGroup();
+
+      $.getJSON("hospitals.json", function(hospitals) {
+            hospitals.forEach(function(hospital) {
+                var marker = L.marker(hospital.location)
+                    .bindPopup(hospital.name);
+                hospitalLayer.addLayer(marker);
+            });
+        });
+      
+
+      // Lớp máy ATM 
+      var atmLayer = L.layerGroup();
+
+      $.getJSON("atms.json", function(atms) {
+          atms.forEach(function(atm) {
+              var marker = L.marker(atm.location)
+                  .bindPopup(atm.name);
+              atmLayer.addLayer(marker);
+          });
+      });
+
+      // Lớp nhà hàng 
+      var restaurantLayer = L.layerGroup();
+
+      $.getJSON("restaurants.json", function(restaurants) {
+          restaurants.forEach(function(restaurant) {
+              var marker = L.marker(restaurant.location)
+                  .bindPopup(restaurant.name);
+              restaurantLayer.addLayer(marker);
+          });
+      });
+
+      // Lớp cửa hàng 
+      var storeLayer = L.layerGroup();
+
+      $.getJSON("stores.json", function(stores) {
+          stores.forEach(function(store) {
+              var marker = L.marker(store.location)
+                  .bindPopup(store.name);
+              storeLayer.addLayer(marker);
+          });
+      });
+
+      var overlayLayers = {
+        "Hospitals": hospitalLayer,
+        "atms": atmLayer,
+        "restaurants": restaurantLayer,
+        "stores": storeLayer
+      };
+
+      L.control.layers(null, overlayLayers).addTo(map);
+
+      hospitalLayer.addTo(map);
+      atmLayer.addTo(map);
+      restaurantLayer.addTo(map);
+      storeLayer.addTo(map);
+
+      ////
+      //
+
+      // chỉ đường đi
+      var routingControl = L.Routing.control({
+            waypoints: [
+                L.latLng(21.028511, 105.804817) // vị trí bắt đầu
+            ],
+            routeWhileDragging: true,
+            geocoder: L.Control.Geocoder.nominatim(),
+            serviceUrl: 'https://router.project-osrm.org/route/v1/' // OSRM demo server
+        }).addTo(map);
+
+        var routeControl = routingControl;
+
+        // nút chỉ đường: errpr
+        L.easyButton('fa-car', function(btn, map) {
+            routingControl.spliceWaypoints(0, 1, map.getCenter());
+        }, 'Chỉ đường').addTo(map);
+      
+    </script>
+  </body>
+</html>

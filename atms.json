@@ -1,0 +1,22 @@
+[
+    { "name": "ATM Vietcombank - Hoàn Kiếm", "location": [21.0278, 105.8513] },
+    { "name": "ATM BIDV - Trần Duy Hưng", "location": [21.0132, 105.7994] },
+    { "name": "ATM Techcombank - Láng Hạ", "location": [21.0171, 105.8255] },
+    { "name": "ATM Agribank - Tôn Đức Thắng", "location": [21.0289, 105.8393] },
+    { "name": "ATM Vietinbank - Giảng Võ", "location": [21.0306, 105.8248] },
+    { "name": "ATM MB Bank - Liễu Giai", "location": [21.0369, 105.8108] },
+    { "name": "ATM ACB - Đào Tấn", "location": [21.0344, 105.8136] },
+    { "name": "ATM Sacombank - Nguyễn Chí Thanh", "location": [21.0246, 105.8187] },
+    { "name": "ATM SHB - Hoàng Quốc Việt", "location": [21.0415, 105.7874] },
+    { "name": "ATM VPBank - Cầu Giấy", "location": [21.0325, 105.7931] },
+    { "name": "ATM TPBank - Phạm Hùng", "location": [21.0285, 105.7783] },
+    { "name": "ATM Vietcombank - Nguyễn Huệ", "location": [10.7769, 106.7009] },
+    { "name": "ATM BIDV - Đinh Tiên Hoàng", "location": [10.7894, 106.6958] },
+    { "name": "ATM Techcombank - Phan Xích Long", "location": [10.7997, 106.6843] },
+    { "name": "ATM Agribank - Hai Bà Trưng", "location": [10.7805, 106.6984] },
+    { "name": "ATM Vietinbank - Lý Tự Trọng", "location": [10.7773, 106.6944] },
+    { "name": "ATM MB Bank - Đinh Tiên Hoàng", "location": [10.7985, 106.6884] },
+    { "name": "ATM ACB - Tôn Đức Thắng", "location": [10.7906, 106.7061] },
+    { "name": "ATM Sacombank - Điện Biên Phủ", "location": [10.7847, 106.6980] },
+    { "name": "ATM SHB - Võ Văn Tần", "location": [10.7779, 106.6903] }
+]
