@@ -19,7 +19,7 @@ Lấy dữ liệu từ Open street map, tuy nhiên năm 2019, open street map đ
 - Bao gồm lọc 1 số vị trí (do data hạn chế) của bệnh viện, cây atm, nhà hàng và cửa hàng trên lãnh thổ Việt Nam
 
 ### Chức năng tìm đường đi
-- Người dùng nhập vị trí bắt đầu và vị trí kết thúc, hệ thống sẽ cung cấp tuyến đường cụ thể.
+- Người dùng nhập vị trí bắt đầu và vị trí kết thúc, hệ thống sẽ cung cấp tuyến đường cụ thể. (sau khi nhấn Enter)
 - Thời gian đường đi tính bằng xe ô tô.
 - Chỉ có 1 tuyến đường được hiển thị.
 
