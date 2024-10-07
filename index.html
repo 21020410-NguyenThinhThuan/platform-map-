@@ -51,6 +51,20 @@
         defaultMarkGeocode: true
       }).addTo(map);
 
+      $.getJSON('https://polygons.openstreetmap.fr/get_geojson.py?id=17296617&params=0').then(function(geoJSON) {
+        var osm = new L.TileLayer.BoundaryCanvas("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          boundary: geoJSON,
+          attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, UK shape <a href="https://github.com/johan/world.geo.json">johan/word.geo.json</a>'
+        });
+      map.addLayer(osm);
+      var ukLayer = L.geoJSON(geoJSON);
+      map.fitBounds(ukLayer.getBounds());
+      });
+      
+      var geocoder = L.Control.geocoder({
+        defaultMarkGeocode: true
+      }).addTo(map);
+
 
       // Lớp bệnh viện (LayerGroup)
       var hospitalLayer = L.layerGroup();
